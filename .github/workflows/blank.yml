@@ -19,7 +19,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Hugging Face API token
         run: |
           MODEL="mistralai/Mistral-7B-Instruct-v0.3"
-          INPUT_TEXT="Hello, how can I help you?"
+          INPUT_TEXT="list 100 important words in spanish language"
           
           RESPONSE=$(curl -s -X POST "https://api-inference.huggingface.co/models/$MODEL" \
             -H "Authorization: Bearer $HF_TOKEN" \
