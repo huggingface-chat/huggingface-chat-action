@@ -18,7 +18,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Hugging Face API token
         run: |
-          MODEL="mistralai/Mistral-7B-Instruct"
+          MODEL="mistralai/Mistral-7B-Instruct-v0.3"
           INPUT_TEXT="Hello, how can I help you?"
           
           RESPONSE=$(curl -s -X POST "https://api-inference.huggingface.co/models/$MODEL" \
