@@ -1,0 +1,30 @@
+name: Hugging Face Chat Request
+
+on:
+  workflow_dispatch:  # Allows manual triggering
+  push:  # Runs on push
+    branches:
+      - main
+
+jobs:
+  chat_request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Send Chat Request to Hugging Face API
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Hugging Face API token
+        run: |
+          MODEL="mistralai/Mistral-7B-Instruct"
+          INPUT_TEXT="Hello, how can I help you?"
+          
+          RESPONSE=$(curl -s -X POST "https://api-inference.huggingface.co/models/$MODEL" \
+            -H "Authorization: Bearer $HF_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"inputs\": \"$INPUT_TEXT\"}")
+
+          echo "Response: $RESPONSE"
+
